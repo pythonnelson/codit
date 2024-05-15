@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { ModeToggleBtn } from "./mode-toggle-btn";
 import SelectLanguages from "./select-languages";
@@ -6,8 +8,13 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
+import Editor from "@monaco-editor/react";
+import { useTheme } from "next-themes";
+import { Button } from "./ui/button";
+import { Play } from "lucide-react";
 
 const EditorComponent = () => {
+  const { theme } = useTheme();
   return (
     <div className="min-h-screen dark:bg-slate-900 rounded-2xl shadow-2xl py-4 px-8">
       {/* ===== EDITOR HEADER ===== */}
@@ -24,21 +31,39 @@ const EditorComponent = () => {
       </div>
 
       {/* ===== EDITOR ===== */}
-      <div className="bg-slate-400 dark:bg-slate-950 p-3">
+      <div className="bg-slate-400 dark:bg-slate-950 p-3 rounded-2xl">
         <ResizablePanelGroup
           direction="horizontal"
           className="w-full rounded-lg border dark:bg-slate-900"
         >
           <ResizablePanel defaultSize={50} minSize={40}>
-            <div className="flex h-[200px] items-center justify-center p-6">
-              <span className="font-semibold">One</span>
-            </div>
+            <Editor
+              theme={theme === "dark" ? "vs-dark" : "vs-light"}
+              height="100vh"
+              // className="min-h-screen"
+              defaultLanguage="javascript"
+              defaultValue="//Code your skill here"
+            />
           </ResizablePanel>
           <ResizableHandle withHandle />
           <ResizablePanel defaultSize={50} minSize={40}>
-            <div className="flex h-[200px] items-center justify-center p-6">
-              <span className="font-semibold">One</span>
+            {/* ===== TOP ===== */}
+            <div className="p-2 space-y-4 bg-slate-400 dark:bg-slate-900 min-h-screen">
+              <div className="flex items-center justify-between bg-slate-400 dark:bg-slate-950 px-3 py-2">
+                <h2>Output</h2>
+                {/* ===== RUN BUTTON ===== */}
+                <Button size="sm" variant="custom">
+                  <Play className="w-4 h-4 mr-1" />
+                  <span>Run</span>
+                </Button>
+                {/* ===== RUN BUTTON ===== */}
+              </div>
+              {/* ===== BODY ===== */}
+              <div className="px-6">
+                <h2>Code output</h2>
+              </div>
             </div>
+            {/* ===== BOTTOM ===== */}
           </ResizablePanel>
 
           {/* <ResizablePanel defaultSize={50}>
