@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ModeToggleBtn } from "./mode-toggle-btn";
 import SelectLanguages from "./select-languages";
 import {
@@ -15,6 +15,21 @@ import { Play } from "lucide-react";
 
 const EditorComponent = () => {
   const { theme } = useTheme();
+  const [sourceCode, setSourceCode] = useState("");
+
+  const editorRef = useRef(null);
+
+  function handleEditDidMount(editor: any) {
+    editorRef.current = editor;
+    editor.focus();
+  }
+
+  function handleOnChange(value: string | undefined) {
+    if (value) {
+      setSourceCode(value);
+    }
+  }
+
   return (
     <div className="min-h-screen dark:bg-slate-900 rounded-2xl shadow-2xl py-4 px-8">
       {/* ===== EDITOR HEADER ===== */}
@@ -40,9 +55,11 @@ const EditorComponent = () => {
             <Editor
               theme={theme === "dark" ? "vs-dark" : "vs-light"}
               height="100vh"
-              // className="min-h-screen"
               defaultLanguage="javascript"
               defaultValue="//Code your skill here"
+              onMount={handleEditDidMount}
+              value={sourceCode}
+              onChange={handleOnChange}
             />
           </ResizablePanel>
           <ResizableHandle withHandle />
