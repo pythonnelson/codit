@@ -26,9 +26,10 @@ export default function EditorComponent() {
   const [loading, setLoading] = useState(false);
   const [output, setOutput] = useState([]);
   const [err, setErr] = useState(false);
-
+  // const language = languageOption.language;
+  // console.log(language);
   const editorRef = useRef(null);
-
+  // console.log(sourceCode);
   function handleEditorDidMount(editor: any) {
     editorRef.current = editor;
     editor.focus();
@@ -57,6 +58,7 @@ export default function EditorComponent() {
     try {
       const result = await compileCode(requestData);
       setOutput(result.run.output.split("\n"));
+      console.log(result);
       setLoading(false);
       setErr(false);
       toast.success("Compiled Successfully");
@@ -64,15 +66,16 @@ export default function EditorComponent() {
       setErr(true);
       setLoading(false);
       toast.error("Failed to compile the Code");
+      console.log(error);
     }
   }
-
+  // console.log(languageOption);
   return (
     <div className="min-h-screen dark:bg-slate-900 rounded-2xl shadow-2xl py-6 px-8">
       {/* EDITOR HEADER */}
       <div className="flex items-center justify-between pb-3">
         <h2 className="scroll-m-20  text-2xl font-semibold tracking-tight first:mt-0">
-          {"<Codit />"}
+          Codex
         </h2>
         <div className="flex items-center space-x-2 ">
           <ModeToggleBtn />
@@ -109,12 +112,20 @@ export default function EditorComponent() {
               <div className="flex items-center justify-between  bg-slate-400 dark:bg-slate-950 px-6 py-2">
                 <h2>Output</h2>
                 {loading ? (
-                  <Button disabled size={"sm"} variant="custom">
+                  <Button
+                    disabled
+                    size={"sm"}
+                    className="dark:bg-purple-600 dark:hover:bg-purple-700 text-slate-100 bg-slate-800 hover:bg-slate-900"
+                  >
                     <Loader className="w-4 h-4 mr-2 animate-spin" />
                     <span>Running please wait...</span>
                   </Button>
                 ) : (
-                  <Button onClick={executeCode} size={"sm"} variant="custom">
+                  <Button
+                    onClick={executeCode}
+                    size={"sm"}
+                    className="dark:bg-purple-600 dark:hover:bg-purple-700 text-slate-100 bg-slate-800 hover:bg-slate-900"
+                  >
                     <Play className="w-4 h-4 mr-2 " />
                     <span>Run</span>
                   </Button>
@@ -125,7 +136,7 @@ export default function EditorComponent() {
                   <div className="flex items-center space-x-2 text-red-500 border border-red-600 px-6 py-6">
                     <TriangleAlert className="w-5 h-5 mr-2 flex-shrink-0" />
                     <p className="text-xs">
-                      Failed to Compile the Code, Please try again !
+                      Failed to Compile the Code , Please try again !
                     </p>
                   </div>
                 ) : (
