@@ -74,7 +74,7 @@ export default function EditorComponent() {
       {/* EDITOR HEADER */}
       <div className="flex items-center justify-between pb-3">
         <h2 className="scroll-m-20  text-2xl font-semibold tracking-tight first:mt-0">
-          Codex
+          {"<Codit />"}
         </h2>
         <div className="flex items-center space-x-2 ">
           <ModeToggleBtn />
