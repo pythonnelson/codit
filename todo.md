@@ -1,7 +1,5 @@
 # Todo
 
 - [x] Dark mode
-- [ ] Design the UI
-- [ ] Implement the functionality
-
-Stop @ 1:54
+- [x] Design the UI
+- [x] Implement the functionality

@@ -8,3 +8,4 @@
       POST: https://emkc.org/api/v2/piston/execute
 
 https://www.npmjs.com/package/monaco-editor
+https://github.com/suren-atoyan/monaco-react
