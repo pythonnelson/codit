@@ -1,5 +1,4 @@
-import EditorComponent from "@/components/editor-component";
-import { ModeToggleBtn } from "@/components/mode-toggle-btn";
+import EditorComponent from "@/components/EditorComponent";
 import React from "react";
 
 const Home = () => {
