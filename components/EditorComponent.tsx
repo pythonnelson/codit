@@ -21,15 +21,14 @@ export interface CodeSnippetsProps {
 }
 export default function EditorComponent() {
   const { theme } = useTheme();
-  const [sourceCode, setSourceCode] = useState(codeSnippets["javascript"]);
+  const [sourceCode, setSourceCode] = useState(codeSnippets["python"]);
   const [languageOption, setLanguageOption] = useState(languageOptions[0]);
   const [loading, setLoading] = useState(false);
   const [output, setOutput] = useState([]);
   const [err, setErr] = useState(false);
-  // const language = languageOption.language;
-  // console.log(language);
+
   const editorRef = useRef(null);
-  // console.log(sourceCode);
+
   function handleEditorDidMount(editor: any) {
     editorRef.current = editor;
     editor.focus();
@@ -69,7 +68,7 @@ export default function EditorComponent() {
       console.log(error);
     }
   }
-  // console.log(languageOption);
+
   return (
     <div className="min-h-screen dark:bg-slate-900 rounded-2xl shadow-2xl py-6 px-8">
       {/* EDITOR HEADER */}
@@ -115,7 +114,7 @@ export default function EditorComponent() {
                   <Button
                     disabled
                     size={"sm"}
-                    className="dark:bg-purple-600 dark:hover:bg-purple-700 text-slate-100 bg-slate-800 hover:bg-slate-900"
+                    className="dark:bg-green-600 dark:hover:bg-green-700 text-slate-100 bg-slate-800 hover:bg-slate-900"
                   >
                     <Loader className="w-4 h-4 mr-2 animate-spin" />
                     <span>Running please wait...</span>
@@ -124,7 +123,7 @@ export default function EditorComponent() {
                   <Button
                     onClick={executeCode}
                     size={"sm"}
-                    className="dark:bg-purple-600 dark:hover:bg-purple-700 text-slate-100 bg-slate-800 hover:bg-slate-900"
+                    className="dark:bg-green-600 dark:hover:bg-green-700 text-slate-100 bg-slate-800 hover:bg-slate-900"
                   >
                     <Play className="w-4 h-4 mr-2 " />
                     <span>Run</span>
